@@ -1,0 +1,1 @@
+I wanted to learn Thymeleaf, I found an interactive tutorial on their web page which had several self-learning exercises. This repository includes the solutions to those exercise problems.

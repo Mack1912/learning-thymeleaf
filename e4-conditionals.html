@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Thymeleaf tutorial: exercise 9</title>
+        <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}" />
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>Thymeleaf tutorial - Solution for exercise 9: more on conditions</h1>
+        <h2>Customer list</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Gender</th>
+                    <th>Payment method</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+            <tbody th:remove="all-but-first">
+                <tr th:each="customer : ${customerList}">
+                    <td th:text="${customer.firstName}">Peter</td>
+                    <td th:text="${customer.lastName}">Jackson</td>
+                    <td th:switch="${customer.gender?.name()}">
+                        <img th:case="'MALE'" src="../../../images/male.png" th:src="@{/images/male.png}" alt="Male" />
+                        <img th:case="'FEMALE'" src="../../../images/female.png" th:src="@{/images/female.png}" alt="Female" />
+                        <span th:case="*">Unknown</span>
+                    </td>
+                    <td>
+                        <span th:text="${customer.paymentMethod.description}">Direct debit</span>
+                        <span th:unless="${customer.paymentMethod.name() == 'CREDIT_CARD'}" class="warn">
+                            Payment must be done in the next 4 days
+                        </span>
+                    </td>
+                    <td th:class="${customer.balance gt 10000} ? 'enhanced'" th:text="${customer.balance}">350</td>
+                </tr>
+                <tr>
+                    <td>Mary</td>
+                    <td>Johanson</td>
+                    <td><img src="../../../images/female.png" /></td>
+                    <td><span>Credit card</span></td>
+                    <td>5000</td>
+                </tr>
+                <tr>
+                    <td>Robert</td>
+                    <td>Allen</td>
+                    <td><img src="../../../images/male.png" /></td>
+                    <td>
+                        <span>Credit card</span>
+                        <span class="warn">Payment must be done in the next 4 days</span>
+                    </td>
+                    <td class="enhanced">50000</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
+
+<!-- 
+Edit the source code in order to practice three different kinds of condition expressions. Use the comment hints at the HTML to guide you.
+Tip: use name() in order to obtain the String representation of an enum value.
+
+    In the gender column you must show a boy image, a girl image or an 'Unknown' text depending on customer gender.
+    In the payment method column you must show a warning message when payment is not credit card payment.
+    In the balance column you must add a specific CSS class when balance is above $10000.
+
+
+
+Gender.java
+package org.thymeleaf.itutorial.beans;
+
+public enum Gender {
+    
+    FEMALE("Female gender"),
+    MALE("Male gender");
+
+    private String description;
+    
+    Gender(final String description) {
+        this.description = description;
+    }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    
+}
+
+PaymentMethod.java
+package org.thymeleaf.itutorial.beans;
+
+public enum PaymentMethod {
+    
+    CREDIT_CARD("Credit card payment"),
+    DIRECT_DEBIT("Direct debit payment"),
+    BANK_TRANSFER("Bank transfer payment");
+
+    private String description;
+    
+    PaymentMethod(final String description) {
+        this.description = description;
+    }
+    
+    public String getDescription() {
+        return this.description;
+    }
+    
+}
+ -->

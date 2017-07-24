@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Thymeleaf tutorial: exercise 2</title>
+       <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}" /> 
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1>Thymeleaf tutorial - Answer for exercise 1: bean values</h1>
+        <h2>Product information</h2>
+        <dl>
+            <dt>Product name</dt>
+            <dd th:text="${product.description}">Some product</dd>
+
+            <dt>Product price</dt>
+            <dd th:text="${product.price}">50</dd>
+
+            <dt>Product available from</dt>
+            <dd th:text="${product.availableFrom}">some date</dd>
+            
+            <dt>Today is</dt>
+            <dd th:text="${#dates.createToday()}">Today</dd>
+            
+            <dt>Today's date and time</dt>
+            <dd th:text="${#dates.createNow()}">Current date and time</dd>
+        </dl>
+    </body>
+</html>
+
+<!-- 
+Info given:
+
+A bean of class Product has been already set into the context model with variable name product
+
+=== Product.java ===
+package org.thymeleaf.itutorial.beans;
+
+import java.util.Date;
+
+public class Product {
+
+    private String description;
+    private Integer price;
+    private Date availableFrom;
+    
+    public Product(final String description, final Integer price, final Date availableFrom) {
+        this.description = description;
+        this.price = price;
+        this.availableFrom = availableFrom;
+    }
+
+    public Date getAvailableFrom() {
+        return this.availableFrom;
+    }
+
+    public void setAvailableFrom(final Date availableFrom) {
+        this.availableFrom = availableFrom;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    public Integer getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(final Integer price) {
+        this.price = price;
+    }
+    
+}
+
+
+ -->

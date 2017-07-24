@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Thymeleaf tutorial: exercise 4</title>
+        <link rel="stylesheet" href="../../../css/main-static.css" th:href="@{/css/main.css}" />
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <h1 th:text="#{tutorial.exercise4}">Thymeleaf tutorial - Answer for exercise 4: internationalization</h1>
+        <h2 th:text="#{product.info}">Product information</h2>
+        <dl>
+            <dt th:text="#{product.name}">Product name</dt>
+            <dd th:text="${product.description}">Red chair</dd>
+
+            <dt th:text="#{product.price}">Product price</dt>
+            <dd th:text="${#numbers.formatDecimal(product.price, 1, 2)}">350</dd>
+
+            <dt th:text="#{product.available}">Product available from</dt>
+            <dd th:text="${#dates.format(product.availableFrom, 'dd-MMM-yyyy')}">28-Jun-2013</dd>
+        </dl>
+    </body>
+</html>
+
+
+<!-- 
+info given :
+
+=== messages_en.properties ===
+tutorial.exercise4=Thymeleaf tutorial - exercise 4: internationalization
+product.info=Product information
+product.name=Product name
+product.price=Product price
+product.available=Product available from
+back=Back
+
+=== messages_es.properties === 
+tutorial.exercise4=Tutorial de Thymeleaf - ejercicio 4: internacionalizaci\u00f3n
+product.info=Informaci\u00f3n del producto
+product.name=Nombre del producto
+product.price=Precio del producto
+product.available=Producto disponible desde
+back=Volver   
+
+=== messages_fr.properties === 
+tutorial.exercise4=Tutorial De Thymeleaf - exercice 4: l'internationalisation
+product.info=Information du produit
+product.name=Nom du produit
+product.price=Prix du produit
+product.available=Produit disponible depuis
+back=Revenir
+
+ -->
